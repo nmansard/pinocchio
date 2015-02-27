@@ -66,7 +66,7 @@ namespace se3
 
       // std::cout << " *** " << link->name << "    < attached by joint ";
       // if(joint)
-      //   std::cout << "#" << link->parent_joint->name << std::endl;
+      // std::cout << "#" << link->parent_joint->name << std::endl;
       // else std::cout << "###ROOT" << std::endl;
  
       //assert(link->inertial && "The parser cannot accept trivial mass");

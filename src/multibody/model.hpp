@@ -152,6 +152,8 @@ namespace se3
 			       const Inertia & Y,const std::string & jointName, 
 			       const std::string & bodyName, bool visual )
   {
+    std::cout << "Add " << jointName << " below " << names[parent] << std::endl;
+
     assert( (nbody==(int)joints.size())&&(nbody==(int)inertias.size())
 	    &&(nbody==(int)parents.size())&&(nbody==(int)jointPlacements.size()) );
     assert( (j.nq()>=0)&&(j.nv()>=0) );
