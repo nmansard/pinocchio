@@ -24,6 +24,11 @@ have to be available on your machine.
  - Libraries:
    - eigen3 (version >= 3.0.5)
    - urdfdom (version >= 0.3.0)
+ - For python bindings:
+   - eigenpy ( https://github.com/stack-of-tasks/eigenpy.git)
+ - Corba based display
+   - gepetto-viewer-corber (https://github.com/humanoid-path-planner/gepetto-viewer-corba.git)
+   - robot-viewer (https://github.com/laas/robot-viewer.git)
  - System tools:
    - CMake (>=2.6)
    - pkg-config
