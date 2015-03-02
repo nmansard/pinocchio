@@ -12,7 +12,7 @@ INCLUDE(cmake/python.cmake)
 
 SET(PROJECT_NAME pinocchio)
 SET(PROJECT_DESCRIPTION "Rigid multi body dynamics algorithms")
-SET(PROJECT_URL "http://github.com/stac-of-tasks/pinocchio")
+SET(PROJECT_URL "http://github.com/stack-of-tasks/pinocchio")
 
 # Disable -Werror on Unix for now.
 SET(CXX_DISABLE_WERROR True)
@@ -59,6 +59,7 @@ SET(HEADERS
   multibody/joint.hpp
   multibody/joint/joint-base.hpp
   multibody/joint/joint-revolute.hpp
+  multibody/joint/joint-prismatic.hpp
   multibody/joint/joint-free-flyer.hpp
   multibody/joint/joint-variant.hpp
   multibody/joint/joint-generic.hpp
@@ -172,7 +173,7 @@ ELSE()
   set(ColourReset "${Esc}[m")
   set(Red         "${Esc}[31m")
   MESSAGE(WARNING "${Red}You don't have eigenpy installed. You will not be able to
-  use pinocchio through python wrapping. Please be sur you want to use
+  use pinocchio through python wrapping. Please be sure you want to use
   pinocchio only as a C++ library or install eigenpy and regenerate Makefile ${ColourReset}")
 ENDIF(EIGENPY_FOUND)
 

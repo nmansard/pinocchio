@@ -120,6 +120,28 @@ namespace se3
 		  }
 		break;
 	      }
+	    case ::urdf::Joint::PRISMATIC:
+	      {
+	    AxisCartesian axis = extractCartesianAxis(joint->axis);  	
+		switch(axis)
+		  {
+		  case AXIS_X:
+		    model.addBody( parent, JointModelPX(), jointPlacement, Y, joint->name,link->name, visual );
+		    break;
+		  case AXIS_Y:
+		    model.addBody( parent, JointModelPY(), jointPlacement, Y, joint->name,link->name, visual );
+		    break;
+		  case AXIS_Z:
+		    model.addBody( parent, JointModelPZ(), jointPlacement, Y, joint->name,link->name, visual );
+		    break;
+		  default:
+		    std::cerr << "Bad axis = (" <<joint->axis.x<<","<<joint->axis.y
+			      <<","<<joint->axis.z<<")" << std::endl;
+		    assert(false && "Only X, Y or Z axis are accepted." );
+		    break;
+		  }
+		break;
+	      }
 	    case ::urdf::Joint::FIXED:
 	      {
 		/* To fixed this, "spot" point should be added. TODO. */
@@ -129,7 +151,7 @@ namespace se3
 	    default:
 	      {
 		std::cerr << "The joint type " << joint->type << " is not supported." << std::endl;
-		assert(false && "Only revolute joint are accepted." );
+		assert(false && "Only revolute and prismatic joint are accepted." );
 		break;
 	      }
 	    }
