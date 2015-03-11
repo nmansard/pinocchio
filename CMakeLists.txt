@@ -59,6 +59,7 @@ SET(HEADERS
   multibody/joint.hpp
   multibody/joint/joint-base.hpp
   multibody/joint/joint-revolute.hpp
+  multibody/joint/joint-revolute-unaligned.hpp
   multibody/joint/joint-prismatic.hpp
   multibody/joint/joint-free-flyer.hpp
   multibody/joint/joint-variant.hpp

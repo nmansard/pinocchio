@@ -2,12 +2,13 @@
 #define __se3_joint_variant_hpp__
 
 #include "pinocchio/multibody/joint/joint-revolute.hpp"
+#include "pinocchio/multibody/joint/joint-revolute-unaligned.hpp"
 #include "pinocchio/multibody/joint/joint-free-flyer.hpp"
 
 namespace se3
 {
-  typedef boost::variant< JointModelRX,JointModelRY,JointModelRZ , JointModelPX,JointModelPY,JointModelPZ, JointModelFreeFlyer> JointModelVariant;
-  typedef boost::variant< JointDataRX, JointDataRY, JointDataRZ  , JointDataPX, JointDataPY, JointDataPZ, JointDataFreeFlyer > JointDataVariant;
+  typedef boost::variant< JointModelRX,JointModelRY,JointModelRZ, JointModelRU, JointModelPX, JointModelPY, JointModelPZ, JointModelFreeFlyer> JointModelVariant;
+  typedef boost::variant< JointDataRX, JointDataRY, JointDataRZ, JointDataRU, JointDataPX, JointDataPY, JointDataPZ, JointDataFreeFlyer > JointDataVariant;
 
   typedef std::vector<JointModelVariant> JointModelVector;
   typedef std::vector<JointDataVariant> JointDataVector;
