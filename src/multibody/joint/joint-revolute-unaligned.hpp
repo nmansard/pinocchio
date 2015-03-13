@@ -64,10 +64,14 @@ namespace se3
   const ConstraintRevoluteUnaligned & ref; 
   TransposeConst(const ConstraintRevoluteUnaligned & ref) : ref(ref) {} 
 
-  Force::Vector3::ConstFixedSegmentReturnType<1>::Type
-  operator*( const Force& f ) const//TODO
-  { 
-    return f.angular().segment<1>(1);//return ref.axis.dot( f.angular()); }
+  // Force::Vector3::ConstFixedSegmentReturnType<1>::Type
+  const Eigen::Matrix<double, 1, 1> //TODO typedef this line to be clean
+  operator*( const Force& f ) const
+  {
+    // return ref.axis.dot(f.angular());  // <-- does not compile
+    return ref.axis.transpose()*f.angular();
+    // const Force::Vector3 ret (ref.axis.dot( f.angular()),0.,0.);
+    // return ret.segment<1>(0);//f.angular().segment<1>(1);//return ref.axis.dot( f.angular()); }
   }
 
    /* [CRBA]  MatrixBase operator* (Constraint::Transpose S, ForceSet::Block) */
@@ -76,8 +80,9 @@ namespace se3
   operator*( const TransposeConst & tc, const Eigen::MatrixBase<D> & F )
   {
     Motion::Vector3 ax(tc.ref.axis);
-    assert(F.rows()==6); //TODO
-    return F.row(4);//ax.transpose() * F.bottomRows<3>();//ref.axis.transpose() * F.bottomRows<3>());
+    assert(F.rows()==6); //TODO 
+    // return F.row(4); <-- compile but wrong result of course
+    return ax.transpose()*F.bottomRows<3>(0);//ref.axis.transpose() * F.bottomRows<3>());
   }
 
       };
@@ -158,8 +163,8 @@ namespace se3
     typedef JointRevoluteUnaligned Joint;
     SE3_JOINT_TYPEDEF;
 
-    Constraint_t S;
     Transformation_t M;
+    Constraint_t S;
     Motion_t v;
     Bias_t c;
 
