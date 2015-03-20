@@ -178,7 +178,6 @@ namespace se3
     /* Y(:,0) = ( 1,0, 0, 0 , z , -y ) */
     const double 
     &m = Y.mass(),
-    &x = Y.lever()[0],
     &y = Y.lever()[1],
     &z = Y.lever()[2];
     Eigen::Matrix<double,6,1> res; res << m,0.0,0.0,
@@ -195,7 +194,6 @@ namespace se3
     const double 
     &m = Y.mass(),
     &x = Y.lever()[0],
-    &y = Y.lever()[1],
     &z = Y.lever()[2];
     Eigen::Matrix<double,6,1> res; res << 0.0,m,0.0,
     -m*z,
@@ -211,8 +209,7 @@ namespace se3
     const double 
     &m = Y.mass(),
     &x = Y.lever()[0],
-    &y = Y.lever()[1],
-    &z = Y.lever()[2];
+      &y = Y.lever()[1];
     Eigen::Matrix<double,6,1> res; res << 0.0,0.0,m,
     m*y,
     -m*x,
