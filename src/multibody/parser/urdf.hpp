@@ -113,9 +113,10 @@ namespace se3
 		    model.addBody( parent, JointModelRZ(), jointPlacement, Y, joint->name,link->name, visual );
 		    break;
 		  default:
-		    std::cerr << "Bad axis = (" <<joint->axis.x<<","<<joint->axis.y
-			      <<","<<joint->axis.z<<")" << std::endl;
-		    assert(false && "Only X, Y or Z axis are accepted." );
+		    Eigen::Vector3d axis( joint->axis.x,joint->axis.y,joint->axis.z );
+		    axis.normalize();
+		    model.addBody( parent, JointModelRevoluteUnaligned(axis), 
+				   jointPlacement, Y, joint->name,link->name, visual );
 		    break;
 		  }
 		break;

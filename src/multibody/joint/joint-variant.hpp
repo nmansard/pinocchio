@@ -7,8 +7,12 @@
 
 namespace se3
 {
-  typedef boost::variant< JointModelRX,JointModelRY,JointModelRZ, JointModelRU, JointModelPX, JointModelPY, JointModelPZ, JointModelFreeFlyer> JointModelVariant;
-  typedef boost::variant< JointDataRX, JointDataRY, JointDataRZ, JointDataRU, JointDataPX, JointDataPY, JointDataPZ, JointDataFreeFlyer > JointDataVariant;
+  typedef boost::variant< JointModelRX,JointModelRY,JointModelRZ, JointModelRevoluteUnaligned, 
+			  JointModelPX, JointModelPY, JointModelPZ, JointModelFreeFlyer
+			  > JointModelVariant;
+  typedef boost::variant< JointDataRX, JointDataRY, JointDataRZ, JointDataRevoluteUnaligned, 
+			  JointDataPX, JointDataPY, JointDataPZ, JointDataFreeFlyer 
+			  > JointDataVariant;
 
   typedef std::vector<JointModelVariant> JointModelVector;
   typedef std::vector<JointDataVariant> JointDataVector;
