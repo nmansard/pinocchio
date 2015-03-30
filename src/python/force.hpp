@@ -59,6 +59,8 @@ namespace se3
 	  .def("se3Action",&Force_fx::se3Action)
 	  .def("se3ActionInverse",&Force_fx::se3ActionInverse)
 
+	  .def("__add__",&ForcePythonVisitor::add)
+	  .def("__sub__",&ForcePythonVisitor::add)
 	  .def("__str__",&ForcePythonVisitor::toString)
 	  .add_property("np",&Force_fx::toVector)
 	  
@@ -73,6 +75,8 @@ namespace se3
       static void setLinear( Force_fx & self, const Vector3_fx & R ) { self.linear(R); }
       static Vector3_fx getAngular( const Force_fx & self ) { return self.angular(); }
       static void setAngular( Force_fx & self, const Vector3_fx & R ) { self.angular(R); }
+      static Force_fx add( const Force_fx& m1,const Force_fx& m2 ) { return m1+m2; }     
+      static Force_fx subst( const Force_fx& m1,const Force_fx& m2 ) { return m1-m2; }     
       static std::string toString(const Force_fx& m) 
       {	  std::ostringstream s; s << m; return s.str();       }
 
