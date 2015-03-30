@@ -45,7 +45,7 @@ namespace se3
       return SE3( Eigen::Quaterniond(q.w,q.x,q.y,q.z).matrix(), Eigen::Vector3d(p.x,p.y,p.z));
     }
 
-    enum AxisCartesian { AXIS_X, AXIS_Y, AXIS_Z, AXIS_ERROR };
+    enum AxisCartesian { AXIS_X, AXIS_Y, AXIS_Z, AXIS_UNALIGNED };
     AxisCartesian extractCartesianAxis( const ::urdf::Vector3 & axis )
     {
       if( (axis.x==1.0)&&(axis.y==0.0)&&(axis.z==0.0) )
@@ -55,9 +55,7 @@ namespace se3
       else if( (axis.x==0.0)&&(axis.y==0.0)&&(axis.z==1.0) )
 	return AXIS_Z;
 
-      std::cerr << "Axis = (" <<axis.x<<","<<axis.y<<","<<axis.z<<")" << std::endl;
-      assert( false && "Only cartesian axis are accepted." );
-      return AXIS_ERROR;
+      return AXIS_UNALIGNED;
     }
 
     void parseTree( ::urdf::LinkConstPtr link, Model & model, bool freeFlyer )
@@ -112,7 +110,7 @@ namespace se3
 		  case AXIS_Z:
 		    model.addBody( parent, JointModelRZ(), jointPlacement, Y, joint->name,link->name, visual );
 		    break;
-		  default:
+		  case AXIS_UNALIGNED:
 		    Eigen::Vector3d axis( joint->axis.x,joint->axis.y,joint->axis.z );
 		    axis.normalize();
 		    model.addBody( parent, JointModelRevoluteUnaligned(axis), 
