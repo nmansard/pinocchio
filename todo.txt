@@ -3,11 +3,17 @@
       - multibody/model.cpp
       - multibody/parser/urdf.cpp
 * Re-organize the python modules, in eigenpy and pinocchio. Eigenpy should be a module (now loaded by pinocchio).
-
 * Add computation of 3d jacobian
 * Add algo to compute the velocity, acceleration of a point attached to a body
 * Add computation of dM/dq, db/dq, db/dqdot, etc
-* Add additionnal in data structure to avoid useless computations
-
 * Add joint limit ( probably in joint-base ) and modify parser consequently
-* Switch between int and long depend on the architecture ?
+* Link with FCL to store the geometry of the robot.
+* Merge with HPP-MODEL.
+
+=== Wrapping of the Joint classes === 
+* Introduce MotionBase, ForceBase, (InertiaBase), ConstraintBase.
+* CRTP the definition of a JointSpec.
+* Introducte JointGeneric and ConstraintGeneric.
+* Wrap JointGeneric with Python. 
+
+* Add additionnal in data structure to avoid useless computations

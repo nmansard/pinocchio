@@ -132,6 +132,7 @@ SET(${PROJECT_NAME}_PYTHON_HEADERS
   python/model.hpp
   python/data.hpp
   python/algorithms.hpp
+  python/dg.hpp
   python/parsers.hpp
   )
 

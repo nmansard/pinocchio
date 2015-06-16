@@ -112,6 +112,15 @@ namespace se3
       }
 
 
+      template<typename MatType>
+      static Eigen::MatrixXd reflex(const typename eigenpy::UnalignedEquivalent<MatType>::type & M, 
+				    bool verbose)
+      {
+	if(verbose)
+	  std::cout << "EigenMat = " << M << std::endl;
+	return Eigen::MatrixXd(M);
+      }
+
 
       /* --- Expose --------------------------------------------------------- */
       static void expose()
@@ -173,6 +182,7 @@ namespace se3
 		"function computes indeed all the jacobians of the model, even if just outputing "
 		"the demanded one. It is therefore outrageously costly wrt a dedicated "
 		"call. Function to be used only for prototyping.");
+
 
       }
 
