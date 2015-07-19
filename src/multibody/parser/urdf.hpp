@@ -104,13 +104,35 @@ namespace se3
 		switch(axis)
 		  {
 		  case AXIS_X:
-		    model.addBody( parent, JointModelRX(), jointPlacement, Y, visual, joint->name,link->name );
+		    model.addBody( parent, JointModelRX(), jointPlacement, Y, joint->name,link->name, visual );
 		    break;
 		  case AXIS_Y:
-		    model.addBody( parent, JointModelRY(), jointPlacement, Y, visual, joint->name,link->name  );
+		    model.addBody( parent, JointModelRY(), jointPlacement, Y, joint->name,link->name, visual );
 		    break;
 		  case AXIS_Z:
-		    model.addBody( parent, JointModelRZ(), jointPlacement, Y, visual, joint->name,link->name );
+		    model.addBody( parent, JointModelRZ(), jointPlacement, Y, joint->name,link->name, visual );
+		    break;
+		  default:
+		    std::cerr << "Bad axis = (" <<joint->axis.x<<","<<joint->axis.y
+			      <<","<<joint->axis.z<<")" << std::endl;
+		    assert(false && "Only X, Y or Z axis are accepted." );
+		    break;
+		  }
+		break;
+	      }
+	    case ::urdf::Joint::PRISMATIC:
+	      {
+	    AxisCartesian axis = extractCartesianAxis(joint->axis);  	
+		switch(axis)
+		  {
+		  case AXIS_X:
+		    model.addBody( parent, JointModelPX(), jointPlacement, Y, joint->name,link->name, visual );
+		    break;
+		  case AXIS_Y:
+		    model.addBody( parent, JointModelPY(), jointPlacement, Y, joint->name,link->name, visual );
+		    break;
+		  case AXIS_Z:
+		    model.addBody( parent, JointModelPZ(), jointPlacement, Y, joint->name,link->name, visual );
 		    break;
 		  default:
 		    std::cerr << "Bad axis = (" <<joint->axis.x<<","<<joint->axis.y
@@ -129,14 +151,14 @@ namespace se3
 	    default:
 	      {
 		std::cerr << "The joint type " << joint->type << " is not supported." << std::endl;
-		assert(false && "Only revolute joint are accepted." );
+		assert(false && "Only revolute and prismatic joint are accepted." );
 		break;
 	      }
 	    }
 	    }}
       else if(freeFlyer)
 	{ /* The link is the root of the body. */
-	  model.addBody( 0, JointModelFreeFlyer(), SE3::Identity(), Y, true, "root", link->name );
+	  model.addBody( 0, JointModelFreeFlyer(), SE3::Identity(), Y, "root", link->name, true );
 	}
 
       BOOST_FOREACH(::urdf::LinkConstPtr child,link->child_links)
